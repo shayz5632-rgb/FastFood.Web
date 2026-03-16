@@ -1,0 +1,54 @@
+﻿@model IEnumerable<FastFood.Models.Item>
+
+@{
+    ViewData["Title"] = "Items";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <h2 class="text-primary">Item List</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-action="Create" class="btn btn-primary">
+                Add New Item
+            </a>
+        </div>
+    </div>
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>Title</th>
+                <th>Price</th>
+                <th>Category</th>
+                <th>SubCategory</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @if (item.Image != null)
+                        {
+                            <img src="@item.Image" width="50" height="50" />
+                        }
+                    </td>
+                    <td>@item.Title</td>
+                    <td>@item.Price.ToString("c")</td>
+                    <td>@item.Category.Name</td>
+                    <td>@item.SubCategory.Name</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id"
+                           class="btn btn-success btn-sm">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@item.Id"
+                           class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

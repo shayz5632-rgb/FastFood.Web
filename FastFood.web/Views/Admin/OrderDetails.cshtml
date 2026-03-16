@@ -1,0 +1,73 @@
+﻿@model FastFood.Models.OrderHeader
+
+@{
+    ViewData["Title"] = "Order Details";
+}
+
+<div class="container">
+    <h2 class="text-primary">Order Details</h2>
+    <hr />
+
+    <div class="row">
+        <div class="col-md-6">
+            <h4>Order Info</h4>
+            <p>Order ID: <strong>@Model.Id</strong></p>
+            <p>Customer: <strong>@Model.ApplicationUser?.Email</strong></p>
+            <p>
+                Date: <strong>
+                    @Model.OrderDate.ToString("dd/MM/yyyy hh:mm tt")
+                </strong>
+            </p>
+            <p>Pickup Name: <strong>@Model.PickupName</strong></p>
+            <p>Phone: <strong>@Model.PhoneNumber</strong></p>
+            <p>Comments: <strong>@Model.Comments</strong></p>
+            <p>Total: <strong>@Model.OrderTotal.ToString("c")</strong></p>
+            <p>Status: <strong>@Model.Status</strong></p>
+        </div>
+
+        <div class="col-md-6">
+            <h4>Update Status</h4>
+            <form asp-action="UpdateStatus" method="post">
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="id" value="@Model.Id" />
+                <div class="mb-3">
+                    <select name="status" class="form-control">
+                        <option value="Pending">Pending</option>
+                        <option value="Processing">Processing</option>
+                        <option value="Completed">Completed</option>
+                        <option value="Cancelled">Cancelled</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">
+                    Update Status
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <hr />
+    <h4>Order Items</h4>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Price</th>
+                <th>Count</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var detail in ViewBag.OrderDetails)
+            {
+                <tr>
+                    <td>@detail.Name</td>
+                    <td>@detail.Price.ToString("c")</td>
+                    <td>@detail.Count</td>
+                    <td>@((detail.Price * detail.Count).ToString("c"))</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <a asp-action="Orders" class="btn btn-secondary">Back</a>
+</div>

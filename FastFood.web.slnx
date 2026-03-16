@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="FastFood.Models/FastFood.Models.csproj" />
+  <Project Path="FastFood.Repository/FastFood.Repository.csproj" />
+  <Project Path="FastFood.Services/FastFood.Services.csproj" />
+  <Project Path="FastFood.Web/FastFood.Web.csproj" />
+</Solution>

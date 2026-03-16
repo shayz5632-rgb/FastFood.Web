@@ -1,0 +1,55 @@
+﻿@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<div class="container">
+    <h2 class="text-primary">Admin Dashboard</h2>
+    <hr />
+
+    <div class="row">
+        <div class="col-md-3 mb-3">
+            <div class="card bg-primary text-white text-center p-3">
+                <h3>@ViewBag.TotalOrders</h3>
+                <p>Total Orders</p>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="card bg-success text-white text-center p-3">
+                <h3>@ViewBag.TotalItems</h3>
+                <p>Total Items</p>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="card bg-warning text-white text-center p-3">
+                <h3>@ViewBag.TotalUsers</h3>
+                <p>Total Users</p>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="card bg-danger text-white text-center p-3">
+                <h3>@ViewBag.TotalRevenue.ToString("c")</h3>
+                <p>Total Revenue</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-md-12">
+            <a asp-action="Orders" class="btn btn-primary me-2">
+                Manage Orders
+            </a>
+            <a asp-controller="Category" asp-action="Index"
+               class="btn btn-success me-2">
+                Manage Categories
+            </a>
+            <a asp-controller="Item" asp-action="Index"
+               class="btn btn-warning me-2">
+                Manage Items
+            </a>
+            <a asp-controller="Coupon" asp-action="Index"
+               class="btn btn-danger">
+                Manage Coupons
+            </a>
+        </div>
+    </div>
+</div>

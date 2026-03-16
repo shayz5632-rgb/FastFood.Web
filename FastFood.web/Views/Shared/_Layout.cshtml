@@ -1,0 +1,164 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - FastFood</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #fff8f0;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, #ff6b35, #f7931e) !important;
+            padding: 15px 0;
+        }
+
+        .navbar-brand {
+            color: white !important;
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        .nav-link {
+            color: white !important;
+            font-weight: 600;
+        }
+
+            .nav-link:hover {
+                color: #fff3cd !important;
+            }
+
+        .hero-section {
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+            .hero-section h1 {
+                font-size: 3rem;
+                font-weight: 700;
+            }
+
+            .hero-section p {
+                font-size: 1.2rem;
+            }
+
+        .food-card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            overflow: hidden;
+        }
+
+            .food-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            }
+
+            .food-card img {
+                height: 200px;
+                object-fit: cover;
+                width: 100%;
+            }
+
+        .btn-order {
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            padding: 10px 25px;
+            font-weight: 600;
+        }
+
+            .btn-order:hover {
+                background: linear-gradient(135deg, #e55a25, #e6820e);
+                color: white;
+            }
+
+        .price-badge {
+            background: #ff6b35;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-weight: 700;
+        }
+
+        footer {
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            color: white;
+            padding: 20px 0;
+            margin-top: 50px;
+        }
+
+            footer a {
+                color: white;
+            }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-0">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    🍔 FastFood
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target=".navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Home"
+                               asp-action="Index">🏠 Home</a>
+                        </li>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Admin"
+                                   asp-action="Dashboard">⚙️ Admin Panel</a>
+                            </li>
+                        }
+                        @if (User.Identity!.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Cart"
+                                   asp-action="Index">🛒 Cart</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Order"
+                                   asp-action="MyOrders">📋 My Orders</a>
+                            </li>
+                        }
+                    </ul>
+                    <partial name="_LoginPartial" />
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div>
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer>
+        <div class="container text-center">
+            <p class="mb-0">&copy; 2026 - 🍔 FastFood - All Rights Reserved</p>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

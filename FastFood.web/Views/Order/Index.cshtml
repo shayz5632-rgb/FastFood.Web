@@ -1,0 +1,78 @@
+﻿@model FastFood.Models.OrderHeader
+
+@{
+    ViewData["Title"] = "Place Order";
+}
+
+<div class="container">
+    <h2 class="text-primary">Place Order</h2>
+    <hr />
+
+    <form asp-action="Index" method="post">
+        @Html.AntiForgeryToken()
+
+        <div class="row">
+            <div class="col-md-6">
+                <h4>Order Summary</h4>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Price</th>
+                            <th>Count</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var cart in ViewBag.Carts)
+                        {
+                            <tr>
+                                <td>@cart.Item.Title</td>
+                                <td>@cart.Item.Price.ToString("c")</td>
+                                <td>@cart.Count</td>
+                                <td>
+                                    @((cart.Item.Price * cart.Count)
+                                                                    .ToString("c"))
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <h4>Total: @ViewBag.Total.ToString("c")</h4>
+            </div>
+
+            <div class="col-md-6">
+                <h4>Your Details</h4>
+
+                <div class="mb-3">
+                    <label asp-for="PickupName" class="form-label"></label>
+                    <input asp-for="PickupName" class="form-control" />
+                    <span asp-validation-for="PickupName"
+                          class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="PhoneNumber" class="form-label"></label>
+                    <input asp-for="PhoneNumber" class="form-control" />
+                    <span asp-validation-for="PhoneNumber"
+                          class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="PickupTime" class="form-label"></label>
+                    <input asp-for="PickupTime" class="form-control"
+                           type="datetime-local" />
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Comments" class="form-label"></label>
+                    <textarea asp-for="Comments"
+                              class="form-control"></textarea>
+                </div>
+
+                <input type="submit" value="Place Order"
+                       class="btn btn-primary w-100" />
+            </div>
+        </div>
+    </form>
+</div>

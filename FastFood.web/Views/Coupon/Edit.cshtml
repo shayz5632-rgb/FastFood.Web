@@ -1,0 +1,53 @@
+﻿@model FastFood.Models.Coupon
+
+@{
+    ViewData["Title"] = "Edit Coupon";
+}
+
+<div class="container">
+    <h2 class="text-primary">Edit Coupon</h2>
+    <hr />
+
+    <form asp-action="Edit">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <input type="hidden" asp-for="Id" />
+
+        <div class="mb-3">
+            <label asp-for="Name" class="form-label"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="CouponType" class="form-label"></label>
+            <select asp-for="CouponType" class="form-control">
+                <option value="">-- Select Type --</option>
+                <option value="Percent">Percent</option>
+                <option value="Dollar">Dollar</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Discount" class="form-label"></label>
+            <input asp-for="Discount" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="MinimumAmount" class="form-label"></label>
+            <input asp-for="MinimumAmount" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <div class="form-check">
+                <input asp-for="IsActive" class="form-check-input" />
+                <label asp-for="IsActive" class="form-check-label"></label>
+            </div>
+        </div>
+
+        <div>
+            <input type="submit" value="Save" class="btn btn-primary" />
+            <a asp-action="Index" class="btn btn-secondary">Back</a>
+        </div>
+    </form>
+</div>

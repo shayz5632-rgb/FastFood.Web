@@ -1,0 +1,50 @@
+﻿@model IEnumerable<FastFood.Models.OrderHeader>
+
+@{
+    ViewData["Title"] = "All Orders";
+}
+
+<div class="container">
+    <h2 class="text-primary">All Orders</h2>
+    <hr />
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Customer</th>
+                <th>Date</th>
+                <th>Total</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in Model)
+            {
+                <tr>
+                    <td>@order.Id</td>
+                    <td>@order.ApplicationUser?.Email</td>
+                    <td>@order.OrderDate.ToString("dd/MM/yyyy")</td>
+                    <td>@order.OrderTotal.ToString("c")</td>
+                    <td>
+                        <span class="badge
+                                @(order.Status == "Completed" ?
+                                                              "bg-success" :
+                                                            order.Status == "Cancelled" ?
+                                                              "bg-danger" : "bg-warning")">
+                            @order.Status
+                        </span>
+                    </td>
+                    <td>
+                        <a asp-action="OrderDetails"
+                           asp-route-id="@order.Id"
+                           class="btn btn-primary btn-sm">
+                            Details
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

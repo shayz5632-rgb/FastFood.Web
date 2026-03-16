@@ -1,0 +1,22 @@
+﻿@model FastFood.Models.OrderHeader
+
+@{
+    ViewData["Title"] = "Order Confirmation";
+}
+
+<div class="container text-center mt-5">
+    <h2 class="text-success">Order Placed Successfully! 🎉</h2>
+    <hr />
+    <h4>Order ID: @Model.Id</h4>
+    <p>Order Date: @Model.OrderDate.ToString("dd/MM/yyyy hh:mm tt")</p>
+    <p>Total: @Model.OrderTotal.ToString("c")</p>
+    <p>Status: @Model.Status</p>
+    <hr />
+    <a asp-action="MyOrders" class="btn btn-primary">
+        View My Orders
+    </a>
+    <a asp-controller="Home" asp-action="Index"
+       class="btn btn-secondary">
+        Back To Menu
+    </a>
+</div>

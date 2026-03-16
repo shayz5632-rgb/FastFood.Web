@@ -1,0 +1,43 @@
+﻿@model IEnumerable<FastFood.Models.Category>
+
+@{
+    ViewData["Title"] = "Categories";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <h2 class="text-primary">Category List</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-action="Create" class="btn btn-primary">
+                Add New Category
+            </a>
+        </div>
+    </div>
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var category in Model)
+            {
+                <tr>
+                    <td>@category.Name</td>
+                    <td>@category.Description</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@category.Id"
+                           class="btn btn-success btn-sm">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@category.Id"
+                           class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

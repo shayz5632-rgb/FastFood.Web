@@ -1,0 +1,36 @@
+﻿@model IEnumerable<FastFood.Models.OrderHeader>
+
+@{
+    ViewData["Title"] = "My Orders";
+}
+
+<div class="container">
+    <h2 class="text-primary">My Orders</h2>
+    <hr />
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Date</th>
+                <th>Total</th>
+                <th>Status</th>
+                <th>Payment</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in Model)
+            {
+                <tr>
+                    <td>@order.Id</td>
+                    <td>
+                        @order.OrderDate.ToString("dd/MM/yyyy")
+                    </td>
+                    <td>@order.OrderTotal.ToString("c")</td>
+                    <td>@order.Status</td>
+                    <td>@order.PaymentStatus</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
