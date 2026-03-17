@@ -43,6 +43,11 @@ builder.Services.ConfigureApplicationCookie(options =>
 builder.Services.AddScoped<IDbInitializer, DbInitializer>();
 
 var app = builder.Build();
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    db.Database.Migrate();
+}
 
 if (!app.Environment.IsDevelopment())
 {
