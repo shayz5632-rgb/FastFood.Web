@@ -5,7 +5,7 @@ EXPOSE 8080
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 COPY . .
-RUN dotnet restore "FastFood.web/FastFood.web.csproj"
+RUN dotnet restore "FastFood.web/FastFood.Web.csproj"
 WORKDIR "/src/FastFood.web"
 RUN dotnet build -c Release -o /app/build
 
